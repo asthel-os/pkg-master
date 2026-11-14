@@ -1,0 +1,37 @@
+{
+  "name": "asthel-os",
+  "repos": [
+    {
+      "name": "ubuntu",
+      "type": "deb",
+      "url": "http://archive.ubuntu.com/ubuntu",
+      "suite": "resolute",
+      "components": ["main", "restricted", "universe", "multiverse"]
+    },
+    {
+      "name": "ubuntu-updates",
+      "type": "deb",
+      "url": "http://archive.ubuntu.com/ubuntu",
+      "suite": "resolute-updates",
+      "components": ["main", "restricted", "universe", "multiverse"]
+    },
+    {
+      "name": "ubuntu-security",
+      "type": "deb",
+      "url": "http://security.ubuntu.com/ubuntu",
+      "suite": "resolute-security",
+      "components": ["main", "restricted", "universe", "multiverse"]
+    },
+    {
+      "name": "asthel-os",
+      "type": "git",
+      "path": "asthel-os/packages.json"
+    },
+    {
+      "name": "drivers",
+      "type": "ppa",
+      "suite": "resolute",
+      "repo": "ppa:graphics-drivers/ppa"
+    }
+  ]
+}

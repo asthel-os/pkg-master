@@ -1,0 +1,150 @@
+# AsthelOS 26.04 Base System Specification
+# Used by `bootstrap` to construct the rootfs from scratch and by `upgrader`
+# to detect component transitions (e.g., bootloader, initramfs, core packages) across releases.
+
+[release]
+name = "AsthelOS"
+version = "26.04"
+codename = "aurora"
+id = "asthel-os"
+base_version = "26.04.1"
+base_suite = "resolute"
+
+[repository]
+master = "asthel-os/pkg-master"
+
+[components]
+bootloader = "grub"
+initramfs = "dracut"
+init = "systemd"
+package_manager = "pkg"
+kernel = "linux-image-generic"
+
+[packages]
+essential = [
+    "base-files",
+    "base-passwd",
+    "bash",
+    "coreutils",
+    "dash",
+    "debianutils",
+    "diffutils",
+    "dpkg",
+    "findutils",
+    "grep",
+    "gzip",
+    "hostname",
+    "init-system-helpers",
+    "libc-bin",
+    "login",
+    "mount",
+    "ncurses-base",
+    "ncurses-bin",
+    "perl-base",
+    "sed",
+    "sysvinit-utils",
+    "tar",
+    "util-linux",
+    "util-linux-extra",
+    "xz-utils",
+    "zstd",
+    "cpio",
+    "binutils",
+    "file",
+    "dmsetup",
+    "mawk",
+    "kbd",
+    "procps",
+    "busybox-static",
+    "libseccomp2",
+    "systemd",
+    "systemd-sysv",
+    "systemd-resolved",
+    "libpam-systemd",
+    "polkitd",
+    "udev",
+    "dbus",
+    "kmod",
+    "sudo",
+    "ca-certificates",
+    "curl",
+    "iproute2",
+    "iputils-ping",
+    "net-tools",
+    "network-manager",
+    "iwd",
+    "dhcpcd-base",
+    "dnsmasq-base",
+    "wpasupplicant",
+    "wireless-regdb",
+    "iw",
+    "rfkill",
+    "modemmanager",
+    "usb-modeswitch",
+    "bluez",
+    "bluez-tools",
+    "libinput-bin",
+    "libinput-tools",
+    "upower",
+    "acpid",
+    "power-profiles-daemon",
+    "pipewire",
+    "pipewire-pulse",
+    "pipewire-alsa",
+    "wireplumber",
+    "alsa-utils",
+    "alsa-ucm-conf",
+    "alsa-topology-conf",
+    "pciutils",
+    "usbutils",
+    "lshw",
+    "hwdata",
+    "dmidecode",
+    "udisks2",
+    "ntfs-3g",
+    "exfatprogs",
+    "pkg"
+]
+
+boot = [
+    "dracut",
+    "dracut-core",
+    "plymouth",
+    "plymouth-themes",
+    "plymouth-label",
+    "grub-common",
+    "grub-pc-bin",
+    "grub-efi-amd64-bin",
+    "efibootmgr",
+    "linux-image-generic",
+    "linux-firmware",
+    "firmware-sof-signed",
+    "intel-microcode",
+    "amd64-microcode"
+]
+
+[configs]
+"etc/os-release" = "/etc/os-release"
+"etc/lsb-release" = "/etc/lsb-release"
+"etc/issue" = "/etc/issue"
+"etc/issue.net" = "/etc/issue.net"
+"etc/legal" = "/etc/legal"
+"etc/update-motd.d/10-help-text" = "/etc/update-motd.d/10-help-text"
+"etc/hostname" = "/etc/hostname"
+"etc/default/grub" = "/etc/default/grub"
+"etc/dracut.conf.d/asthel-os.conf" = "/etc/dracut.conf.d/asthel-os.conf"
+"etc/plymouth/plymouthd.conf" = "/etc/plymouth/plymouthd.conf"
+"usr/share/plymouth/themes/asthel-os/asthel-os.plymouth" = "/usr/share/plymouth/themes/asthel-os/asthel-os.plymouth"
+"usr/share/plymouth/themes/asthel-os/asthel-os.script" = "/usr/share/plymouth/themes/asthel-os/asthel-os.script"
+"usr/share/plymouth/themes/asthel-os/logo.png" = "/usr/share/plymouth/themes/asthel-os/logo.png"
+"usr/share/plymouth/themes/asthel-os/progress_box.png" = "/usr/share/plymouth/themes/asthel-os/progress_box.png"
+"usr/share/plymouth/themes/asthel-os/progress_bar.png" = "/usr/share/plymouth/themes/asthel-os/progress_bar.png"
+"boot/grub/themes/asthel-os/theme.txt" = "/boot/grub/themes/asthel-os/theme.txt"
+"boot/grub/themes/asthel-os/logo-dark.svg" = "/boot/grub/themes/asthel-os/logo-dark.svg"
+"boot/grub/themes/asthel-os/background.png" = "/boot/grub/themes/asthel-os/background.png"
+"boot/grub/themes/asthel-os/splash.png" = "/boot/grub/themes/asthel-os/splash.png"
+"boot/grub/themes/asthel-os/select_c.png" = "/boot/grub/themes/asthel-os/select_c.png"
+"boot/grub/themes/asthel-os/select_w.png" = "/boot/grub/themes/asthel-os/select_w.png"
+"boot/grub/themes/asthel-os/select_e.png" = "/boot/grub/themes/asthel-os/select_e.png"
+"boot/grub/themes/asthel-os/icons/asthel-os.png" = "/boot/grub/themes/asthel-os/icons/asthel-os.png"
+"boot/grub/themes/asthel-os/icons/gnu-linux.png" = "/boot/grub/themes/asthel-os/icons/gnu-linux.png"

@@ -1,0 +1,4 @@
+#!/bin/sh
+printf "\n"
+printf " * Repository:     https://github.com/asthel-os\n"
+printf " * Packages:       pkg --help\n"

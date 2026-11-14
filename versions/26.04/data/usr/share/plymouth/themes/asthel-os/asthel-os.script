@@ -1,0 +1,123 @@
+// AsthelOS macOS-Style Boot Splash Script
+// Pure pitch-black (#000000) background + Dark-Mode AsthelOS Logo + Smooth Rounded Progress Bar
+// Automatically re-centers and scales proportionally whenever KMS graphics drivers change screen resolution!
+
+Window.SetBackgroundTopColor(0.0, 0.0, 0.0);
+Window.SetBackgroundBottomColor(0.0, 0.0, 0.0);
+
+logo.raw_image = Image("logo.png");
+logo.sprite = Sprite();
+
+progress_box.raw_image = Image("progress_box.png");
+progress_box.sprite = Sprite();
+
+progress_bar.raw_image = Image("progress_bar.png");
+progress_bar.sprite = Sprite();
+
+global.screen_w = 0;
+global.screen_h = 0;
+global.bar_total_w = 240;
+global.bar_h = 6;
+global.current_progress = 0.06;
+global.target_progress = 0.14;
+global.ticks = 0;
+
+fun layout_screen() {
+    w = Window.GetWidth();
+    h = Window.GetHeight();
+    if (w <= 0) w = 1024;
+    if (h <= 0) h = 768;
+
+    global.screen_w = w;
+    global.screen_h = h;
+
+    // Scale logo proportionally to 16% of screen height (matches GRUB splash.png)
+    logo_size = Math.Int(h * 0.16);
+    if (logo_size < 96) logo_size = 96;
+    logo.image = logo.raw_image.Scale(logo_size, logo_size);
+    logo.sprite.SetImage(logo.image);
+    logo.x = w / 2 - logo_size / 2;
+    logo.y = Math.Int(h * 0.43) - logo_size / 2;
+    logo.sprite.SetPosition(logo.x, logo.y, 10);
+
+    // Scale macOS-style progress bar proportionally to 22.2% of screen height
+    global.bar_total_w = Math.Int(h * 0.222);
+    if (global.bar_total_w < 160) global.bar_total_w = 160;
+    global.bar_h = Math.Int(h * 0.006);
+    if (global.bar_h < 6) global.bar_h = 6;
+
+    progress_box.image = progress_box.raw_image.Scale(global.bar_total_w, global.bar_h);
+    progress_box.sprite.SetImage(progress_box.image);
+    progress_box.x = w / 2 - global.bar_total_w / 2;
+    progress_box.y = logo.y + logo_size + Math.Int(h * 0.04);
+    progress_box.sprite.SetPosition(progress_box.x, progress_box.y, 11);
+
+    progress_bar.x = progress_box.x;
+    progress_bar.y = progress_box.y;
+    progress_bar.sprite.SetPosition(progress_bar.x, progress_bar.y, 12);
+}
+
+fun update_bar(p) {
+    if (p < 0.06) p = 0.06;
+    if (p > 1.0) p = 1.0;
+    fill_w = Math.Int(global.bar_total_w * p);
+    if (fill_w < global.bar_h) fill_w = global.bar_h;
+    progress_bar.image = progress_bar.raw_image.Scale(fill_w, global.bar_h);
+    progress_bar.sprite.SetImage(progress_bar.image);
+}
+
+layout_screen();
+update_bar(global.current_progress);
+
+// Smooth 50fps refresh loop that also detects KMS resolution changes immediately
+fun refresh_callback() {
+    if (Window.GetWidth() != global.screen_w || Window.GetHeight() != global.screen_h) {
+        layout_screen();
+        update_bar(global.current_progress);
+    }
+
+    global.ticks++;
+    fallback_p = 1.0 - (1.0 / (1.0 + global.ticks * 0.008));
+    if (fallback_p * 0.90 > global.target_progress) {
+        global.target_progress = fallback_p * 0.90;
+    }
+    if (global.current_progress < global.target_progress) {
+        step = (global.target_progress - global.current_progress) * 0.10;
+        if (step < 0.003) step = 0.003;
+        global.current_progress += step;
+        if (global.current_progress > global.target_progress) {
+            global.current_progress = global.target_progress;
+        }
+        update_bar(global.current_progress);
+    }
+}
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun display_normal_callback() {
+    layout_screen();
+    update_bar(global.current_progress);
+}
+Plymouth.SetDisplayNormalFunction(display_normal_callback);
+
+// Real Plymouth boot progress callback (0.0 .. 1.0)
+fun boot_progress_callback(duration, progress) {
+    if (progress > global.target_progress) {
+        global.target_progress = progress;
+    }
+}
+Plymouth.SetBootProgressFunction(boot_progress_callback);
+
+// System update progress callback (0 .. 100)
+fun system_update_callback(progress) {
+    norm = progress / 100.0;
+    if (norm > global.target_progress) {
+        global.target_progress = norm;
+    }
+}
+Plymouth.SetSystemUpdateFunction(system_update_callback);
+
+fun quit_callback() {
+    layout_screen();
+    update_bar(1.0);
+}
+Plymouth.SetQuitFunction(quit_callback);

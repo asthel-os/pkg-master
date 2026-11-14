@@ -1,0 +1,39 @@
+# AsthelOS 26.04 Live & Installer Specification
+# Used by `bootstrap` when building the bootable Live ISO environment.
+
+[live]
+base = "base.toml"
+iso_label = "ASTHELOS_26_04"
+iso_filename = "asthel-os-26.04-live-amd64.iso"
+hostname = "asthel-live"
+username = "asthel"
+autologin = true
+squashfs_compression = "zstd"
+
+[packages]
+live = [
+    "squashfs-tools",
+    "xorriso",
+    "mtools",
+    "dosfstools",
+    "parted",
+    "e2fsprogs",
+    "btrfs-progs",
+    "nano",
+    "less"
+]
+
+[services]
+enable = [
+    "NetworkManager.service",
+    "iwd.service",
+    "bluetooth.service",
+    "upower.service",
+    "acpid.service",
+    "udisks2.service",
+    "polkit.service",
+    "getty@tty1.service"
+]
+
+[configs]
+"boot/grub/grub.cfg" = "/boot/grub/grub.cfg"

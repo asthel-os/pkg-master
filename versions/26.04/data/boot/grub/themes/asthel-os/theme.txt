@@ -1,0 +1,55 @@
+# AsthelOS Clean Minimal Dark GRUB2 Theme
+# Layout: Left Dark-Mode AsthelOS Logo on Pitch Black (#000000) + Right Clean Minimal OS Menu
+
+title-text: ""
+desktop-image: "background.png"
+desktop-image-scale-method: "stretch"
+desktop-color: "#000000"
+terminal-font: "Fixed Regular 13"
+terminal-left: "0"
+terminal-top: "0"
+terminal-width: "100%"
+terminal-height: "100%"
+terminal-border: "0"
+
+# Clean header above the right-aligned menu ("Choose an OS")
++ label {
+    left = 56%
+    top = 38%
+    width = 38%
+    align = "left"
+    text = "Choose an OS"
+    color = "#e2e8f0"
+    font = "DejaVu Sans Bold 14"
+}
+
+# Right-aligned minimal boot menu with AsthelOS icons and metallic silver-slate highlight
++ boot_menu {
+    left = 56%
+    top = 43%
+    width = 38%
+    height = 22%
+    item_font = "DejaVu Sans Regular 12"
+    selected_item_font = "DejaVu Sans Bold 12"
+    item_color = "#94a3b8"
+    selected_item_color = "#f8fafc"
+    icon_width = 24
+    icon_height = 24
+    item_icon_space = 14
+    item_height = 36
+    item_padding = 6
+    item_spacing = 8
+    selected_item_pixmap_style = "select_*.png"
+    scrollbar = false
+}
+
+# Clean minimal keybind footer right below the boot menu
++ label {
+    left = 56%
+    top = 67%
+    width = 38%
+    align = "left"
+    text = "↵ Select     E Options     C Command"
+    color = "#cbd5e1"
+    font = "DejaVu Sans Regular 12"
+}

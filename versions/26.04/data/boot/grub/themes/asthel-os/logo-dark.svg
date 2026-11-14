@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Asthel OS Dark">
+  <defs>
+    <linearGradient id="ga" gradientUnits="userSpaceOnUse" x1="134" y1="372" x2="378" y2="372">
+      <stop offset="0" stop-color="#3b4252"/>
+      <stop offset="0.5" stop-color="#64748b"/>
+      <stop offset="1" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="gc" gradientUnits="userSpaceOnUse" x1="150" y1="316" x2="362" y2="316">
+      <stop offset="0" stop-color="#cbd5e1"/>
+      <stop offset="0.5" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#94a3b8"/>
+    </linearGradient>
+    <filter id="sh" x="-25%" y="-25%" width="150%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dy="8" result="b"/>
+      <feFlood flood-color="#000000" flood-opacity="0.65"/>
+      <feComposite in2="b" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="sh2" x="-25%" y="-25%" width="150%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7"/>
+      <feOffset dy="6" result="b"/>
+      <feFlood flood-color="#000000" flood-opacity="0.72"/>
+      <feComposite in2="b" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="rc"><rect x="296" y="0" width="216" height="512"/></clipPath>
+    <path id="A" d="M134 372 L256 180 L378 372" fill="none" stroke-width="56" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  </defs>
+  <g filter="url(#sh)">
+    <use href="#A" stroke="url(#ga)"/>
+  </g>
+  <path d="M146 310 Q256 478 366 310 Q256 366 146 310 Z" fill="url(#gc)" filter="url(#sh2)"/>
+  <g clip-path="url(#rc)" filter="url(#sh2)">
+    <use href="#A" stroke="url(#ga)"/>
+  </g>
+  <path d="M256 127 L231 169 L281 169 Z" fill="#f8fafc" opacity="0.32"/>
+  <path d="M152 346 L214 242" fill="none" stroke="#f8fafc" stroke-width="7" stroke-linecap="round" opacity="0.48"/>
+  <path d="M298 242 L360 346" fill="none" stroke="#f8fafc" stroke-width="7" stroke-linecap="round" opacity="0.34"/>
+</svg>
