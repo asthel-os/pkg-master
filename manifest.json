@@ -1,0 +1,7 @@
+{
+  "name": "asthel-os",
+  "type": "versioned",
+  "default_version": "26.04",
+  "versions_dir": "versions",
+  "repository_file": "repository.json"
+}
